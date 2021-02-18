@@ -1,0 +1,26 @@
+---
+version: '3.8'
+
+services:
+  valheim:
+    image: valheim:latest
+    container_name: valheim
+    build: ./build
+    restart: unless-stopped
+    init: true
+    environment:
+      PUID: 117
+      GUID: 120
+      SERVER_NAME: Huginn and Muninn
+      PASSWORD: ${PASSWORD}
+      ADMINS: ${ADMINS}
+      ALLOWED: ${ALLOWED}
+      # BANNED: ${BANNED}
+      # PUBLIC: 1
+    ports:
+      - 2456:2456/udp
+      - 2457:2457/udp
+      - 2458:2458/udp
+    volumes:
+      - ./server:/server
+      - ./data:/data
